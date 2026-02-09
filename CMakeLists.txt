@@ -22,6 +22,13 @@ find_package(gz-math7 REQUIRED)
 find_package(gz-transport13 REQUIRED)
 find_package(gz-msgs10 REQUIRED)
 
+#============================================================================
+# Hooks
+ament_environment_hooks("hooks/resource_paths.dsv.in")
+ament_environment_hooks("hooks/resource_paths.sh")
+
+#============================================================================
+
 # Add plugin library
 add_library(${PROJECT_NAME} SHARED
   src/gazebo_ros_actor_command.cpp
