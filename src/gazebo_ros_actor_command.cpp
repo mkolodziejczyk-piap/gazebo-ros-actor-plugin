@@ -120,7 +120,7 @@ void GazeboRosActorCommand::Configure(
     auto newPose = initialPose;
     newPose.Pos().X(0);
     newPose.Pos().Y(0);
-    // *poseComp = gz::sim::components::Pose(newPose);
+    *poseComp = gz::sim::components::Pose(newPose);
   }
 
   // Having a trajectory pose prevents the actor from moving with the
