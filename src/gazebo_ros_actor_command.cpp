@@ -194,13 +194,13 @@ void GazeboRosActorCommand::PreUpdate(
   auto actorPose = trajPoseComp->Data();
   auto currentPose = actorPose;
 
-  actorPose.Rot() = math::Quaterniond(0, 0, 0);
+  actorPose.Rot() = gz::math::Quaterniond(0, 0, 0);
 
   // Update actor root pose
-  *trajPoseComp = components::TrajectoryPose(actorPose);
+  *trajPoseComp = gz::components::TrajectoryPose(actorPose);
   // Mark as a one-time-change so that the change is propagated to the GUI
   _ecm.SetChanged(this->dataPtr->actorEntity,
-      components::TrajectoryPose::typeId, ComponentState::OneTimeChange);
+      gz::components::TrajectoryPose::typeId, gz::ComponentState::OneTimeChange);
 
 /*
 
