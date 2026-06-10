@@ -120,7 +120,7 @@ void GazeboRosActorCommand::Configure(
     auto newPose = initialPose;
     newPose.Pos().X(0);
     newPose.Pos().Y(0);
-    newPose.Rot() = math::Quaterniond(0, 0, 0);
+    newPose.Rot() = gz::math::Quaterniond(0, 0, 0);
     *poseComp = gz::sim::components::Pose(newPose);
   }
 
