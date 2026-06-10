@@ -120,7 +120,7 @@ void GazeboRosActorCommand::Configure(
     auto newPose = initialPose;
     newPose.Pos().X(0);
     newPose.Pos().Y(0);
-    newPose.Rot() = gz::math::Quaterniond(0, 0, 0);
+    // newPose.Rot() = gz::math::Quaterniond(0, 0, 0);
     *poseComp = gz::sim::components::Pose(newPose);
   }
 
@@ -193,6 +193,14 @@ void GazeboRosActorCommand::PreUpdate(
   auto trajPoseComp = _ecm.Component<gz::sim::components::TrajectoryPose>(this->actorEntity_);
   auto actorPose = trajPoseComp->Data();
   auto currentPose = actorPose;
+
+  actorPose.Rot() = math::Quaterniond(0, 0, 0);
+
+  // Update actor root pose
+  *trajPoseComp = components::TrajectoryPose(actorPose);
+  // Mark as a one-time-change so that the change is propagated to the GUI
+  _ecm.SetChanged(this->dataPtr->actorEntity,
+      components::TrajectoryPose::typeId, ComponentState::OneTimeChange);
 
 /*
 
