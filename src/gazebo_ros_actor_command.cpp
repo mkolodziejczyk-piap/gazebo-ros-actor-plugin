@@ -120,6 +120,7 @@ void GazeboRosActorCommand::Configure(
     auto newPose = initialPose;
     newPose.Pos().X(0);
     newPose.Pos().Y(0);
+    newPose.Rot() = math::Quaterniond(0, 0, 0);
     *poseComp = gz::sim::components::Pose(newPose);
   }
 
@@ -183,7 +184,7 @@ void GazeboRosActorCommand::PathCallback(const gz::msgs::Pose_V &msg) {
 void GazeboRosActorCommand::PreUpdate(
     const gz::sim::UpdateInfo &_info,
     gz::sim::EntityComponentManager &_ecm) {
-/*
+
   GZ_PROFILE("GazeboRosActorCommand::PreUpdate");
 
   std::chrono::duration<double> dt = _info.simTime - this->lastUpdate_;
@@ -192,6 +193,8 @@ void GazeboRosActorCommand::PreUpdate(
   auto trajPoseComp = _ecm.Component<gz::sim::components::TrajectoryPose>(this->actorEntity_);
   auto actorPose = trajPoseComp->Data();
   auto currentPose = actorPose;
+
+/*
 
   gz::math::Vector3d rpy = currentPose.Rot().Euler();
 
