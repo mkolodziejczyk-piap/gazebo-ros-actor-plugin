@@ -183,7 +183,7 @@ void GazeboRosActorCommand::PathCallback(const gz::msgs::Pose_V &msg) {
 void GazeboRosActorCommand::PreUpdate(
     const gz::sim::UpdateInfo &_info,
     gz::sim::EntityComponentManager &_ecm) {
-
+/*
   GZ_PROFILE("GazeboRosActorCommand::PreUpdate");
 
   std::chrono::duration<double> dt = _info.simTime - this->lastUpdate_;
@@ -306,6 +306,7 @@ void GazeboRosActorCommand::PreUpdate(
       gz::sim::components::AnimationTime::typeId,
       gz::sim::ComponentState::OneTimeChange);
   }
+*/
 }
 
 void GazeboRosActorCommand::ChooseNewTarget() {
