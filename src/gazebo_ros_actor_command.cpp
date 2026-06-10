@@ -194,6 +194,7 @@ void GazeboRosActorCommand::PreUpdate(
   auto actorPose = trajPoseComp->Data();
   auto currentPose = actorPose;
 
+  /*
   actorPose.Rot() = gz::math::Quaterniond(0, 0, 0);
 
   // Update actor root pose
@@ -201,8 +202,7 @@ void GazeboRosActorCommand::PreUpdate(
   // Mark as a one-time-change so that the change is propagated to the GUI
   _ecm.SetChanged(this->actorEntity_,
       gz::sim::components::TrajectoryPose::typeId, gz::sim::ComponentState::OneTimeChange);
-
-/*
+  */
 
   gz::math::Vector3d rpy = currentPose.Rot().Euler();
 
@@ -317,7 +317,7 @@ void GazeboRosActorCommand::PreUpdate(
       gz::sim::components::AnimationTime::typeId,
       gz::sim::ComponentState::OneTimeChange);
   }
-*/
+
 }
 
 void GazeboRosActorCommand::ChooseNewTarget() {
