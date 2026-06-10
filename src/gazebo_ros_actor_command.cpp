@@ -199,7 +199,7 @@ void GazeboRosActorCommand::PreUpdate(
   // Update actor root pose
   *trajPoseComp = gz::sim::components::TrajectoryPose(actorPose);
   // Mark as a one-time-change so that the change is propagated to the GUI
-  _ecm.SetChanged(this->dataPtr->actorEntity,
+  _ecm.SetChanged(this->actorEntity_,
       gz::sim::components::TrajectoryPose::typeId, gz::sim::ComponentState::OneTimeChange);
 
 /*
