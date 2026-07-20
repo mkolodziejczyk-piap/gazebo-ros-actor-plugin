@@ -142,6 +142,8 @@ void GazeboRosActorCommand::Configure(
     gzerr << "Failed to subscribe to path topic: " << this->pathTopic_ << std::endl;
   }
 
+  this->posePub_ = this->node_.Advertise<msgs::Pose>("/diver/pose");
+
   this->lastUpdate_ = std::chrono::steady_clock::duration::zero();
 }
 
@@ -318,7 +320,60 @@ void GazeboRosActorCommand::PreUpdate(
       gz::sim::ComponentState::OneTimeChange);
   }
 
+  // this->posePub_
+
 }
+
+void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
+    const gz::sim::EntityComponentManager &_ecm)
+{
+    GZ_PROFILE("ActorPose::PostUpdate");
+
+    if (_info.dt < std::chrono::steady_clock::duration::zero())
+    {
+        gzwarn << "Detected jump back in time ["
+            << std::chrono::duration_cast<std::chrono::seconds>(_info.dt).count()
+            << "s]. System may not work properly." << std::endl;
+    }
+
+    if (_info.paused)
+    return;
+
+    // bool publish = true;
+
+    // auto diff = _info.simTime - this->dataPtr->lastUpdate;
+
+    // if ((diff > std::chrono::steady_clock::duration::zero()) &&
+    //   (diff < this->dataPtr->updatePeriod))
+    // {
+    //     publish = false;
+    // }
+    // if (!publish)
+    //     return;
+    
+    auto actorpose = _ecm.Component<components::WorldPose>(this->actorEntity_);
+
+    gzmsg << "actor pose: " << actorpose->Data().Pos().X() << std::endl;
+
+    // msgs::Pose *msg = nullptr;
+    // this->dataPtr->poseMsg.Clear();
+    // msg = &this->dataPtr->poseMsg;
+    
+    // auto timeStamp = gz::sim::convert<gz::msgs::Time>(_info.simTime);
+    // auto header = msg->mutable_header();
+    // header->mutable_stamp()->CopyFrom(timeStamp);
+    // const math::Pose3d &transform = actorpose->Data();  
+    // auto frame = header->add_data();
+    // msg->set_name(_ecm.Component<components::Name>(this->dataPtr->actorEntity)->Data());
+    // msgs::Set(msg, transform);
+
+
+    // this->dataPtr->posePub.Publish(this->dataPtr->poseMsg);
+
+    // this->dataPtr->PublishPoses(this->dataPtr->poses, convert<msgs::Time>(_info.simTime), this->dataPtr->posePub);
+
+    // this->dataPtr->lastUpdate = _info.simTime;
+}  
 
 void GazeboRosActorCommand::ChooseNewTarget() {
   this->idx_++;
