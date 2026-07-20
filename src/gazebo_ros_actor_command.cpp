@@ -351,7 +351,7 @@ void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
     // if (!publish)
     //     return;
     
-    auto actorpose = _ecm.Component<components::WorldPose>(this->actorEntity_);
+    auto actorpose = _ecm.Component<gz::sim::components::WorldPose>(this->actorEntity_);
 
     gzmsg << "actor pose: " << actorpose->Data().Pos().X() << std::endl;
 
