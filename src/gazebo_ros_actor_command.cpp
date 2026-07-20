@@ -327,7 +327,7 @@ void GazeboRosActorCommand::PreUpdate(
 void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
     const gz::sim::EntityComponentManager &_ecm)
 {
-    GZ_PROFILE("ActorPose::PostUpdate");
+    GZ_PROFILE("GazeboRosActorCommand::PostUpdate");
 
     // if (_info.dt < std::chrono::steady_clock::duration::zero())
     // {
@@ -395,7 +395,8 @@ GZ_ADD_PLUGIN(
   gazebo_ros_actor_plugin::GazeboRosActorCommand,
   gz::sim::System,
   GazeboRosActorCommand::ISystemConfigure,
-  GazeboRosActorCommand::ISystemPreUpdate)
+  GazeboRosActorCommand::ISystemPreUpdate
+  GazeboRosActorCommand::ISystemPostUpdate)
 
 GZ_ADD_PLUGIN_ALIAS(
   gazebo_ros_actor_plugin::GazeboRosActorCommand,
