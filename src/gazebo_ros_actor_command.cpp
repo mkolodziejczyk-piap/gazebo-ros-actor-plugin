@@ -358,12 +358,12 @@ void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
     auto actorPose = worldPoseComp->Data();
     auto currentPose = actorPose;
 
-    // gzmsg << "actor pose: " << actorpose->Data().Pos().X() << std::endl;
+    gzmsg << "actor pose: " << currentPose->Data().Pos().X() << std::endl;
 
-    if (currentPose) {    
-      std::cout << currentPose.Pos().X() << std::endl;
+    if (!currentPose) { 
+      std::cout << "missing" << std::endl;   
     } else {
-      std::cout << "missing" << std::endl;
+      std::cout << currentPose.Pos().X() << std::endl;      
     }
 
 
