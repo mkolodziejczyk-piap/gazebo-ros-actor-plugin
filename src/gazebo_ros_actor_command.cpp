@@ -142,7 +142,7 @@ void GazeboRosActorCommand::Configure(
     gzerr << "Failed to subscribe to path topic: " << this->pathTopic_ << std::endl;
   }
 
-  this->posePub_ = this->node_.Advertise<msgs::Pose>("/diver/pose");
+  this->posePub_ = this->node_.Advertise<gz::msgs::Pose>("/diver/pose");
 
   this->lastUpdate_ = std::chrono::steady_clock::duration::zero();
 }
