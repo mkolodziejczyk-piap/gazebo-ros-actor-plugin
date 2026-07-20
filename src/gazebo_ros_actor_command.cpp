@@ -360,7 +360,12 @@ void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
 
     // gzmsg << "actor pose: " << actorpose->Data().Pos().X() << std::endl;
 
-    std::cout << currentPose.Pos().X() << std::endl;
+    if (currentPose) {    
+      std::cout << currentPose.Pos().X() << std::endl;
+    } else {
+      std::cout << "missing" << std::endl;
+    }
+
 
     // gz::msgs::Pose pose_msg;
 
