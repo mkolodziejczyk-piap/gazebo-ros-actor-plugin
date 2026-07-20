@@ -353,9 +353,9 @@ void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
     
     // auto actorpose = _ecm.Component<gz::sim::components::WorldPose>(this->actorEntity_);
 
-    // auto worldPoseComp = _ecm.Component<gz::sim::components::WorldPose>(this->actorEntity_);
-    auto trajPoseComp = _ecm.Component<gz::sim::components::TrajectoryPose>(this->actorEntity_);
-    auto actorPose = trajPoseComp->Data();
+    auto worldPoseComp = _ecm.Component<gz::sim::components::WorldPose>(this->actorEntity_);
+    // auto trajPoseComp = _ecm.Component<gz::sim::components::TrajectoryPose>(this->actorEntity_);
+    auto actorPose = worldPoseComp->Data();
     auto currentPose = actorPose;
 
     // gzmsg << "actor pose: " << actorpose->Data().Pos().X() << std::endl;
