@@ -357,6 +357,12 @@ void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
 
     std::cout << actorpose->Data().Pos().X() << std::endl;
 
+    msgs::Pose pose_msg;
+
+    pose_msg.mutable_position()->set_x(actorpose->Data().Pos().X());
+
+    this->posePub_.Publish(pose_msg);
+
     // msgs::Pose *msg = nullptr;
     // this->dataPtr->poseMsg.Clear();
     // msg = &this->dataPtr->poseMsg;
