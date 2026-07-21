@@ -36,8 +36,8 @@ namespace gazebo_ros_actor_plugin {
 class GazeboRosActorCommand :
   public gz::sim::System,
   public gz::sim::ISystemConfigure,
-  public gz::sim::ISystemPreUpdate,
-  public gz::sim::ISystemPostUpdate
+  public gz::sim::ISystemPreUpdate
+  // public gz::sim::ISystemPostUpdate
 {
  public:
    GazeboRosActorCommand();
@@ -48,9 +48,9 @@ class GazeboRosActorCommand :
    void PreUpdate(const gz::sim::UpdateInfo &_info,
                   gz::sim::EntityComponentManager &_ecm) override;
 
-  void PostUpdate(
-        const gz::sim::UpdateInfo &_info,
-        const gz::sim::EntityComponentManager &_ecm) override;
+  // void PostUpdate(
+  //       const gz::sim::UpdateInfo &_info,
+  //       const gz::sim::EntityComponentManager &_ecm) override;
 
  private:
    void VelCallback(const gz::msgs::Twist &msg);
@@ -58,7 +58,7 @@ class GazeboRosActorCommand :
    void ChooseNewTarget();
 
    gz::transport::Node node_;
-   gz::transport::Node::Publisher posePub_;
+  //  gz::transport::Node::Publisher posePub_;
    std::string velTopic_;
    std::string pathTopic_;
    gz::sim::Entity actorEntity_;

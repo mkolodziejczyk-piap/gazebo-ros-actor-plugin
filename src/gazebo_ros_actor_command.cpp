@@ -142,7 +142,7 @@ void GazeboRosActorCommand::Configure(
     gzerr << "Failed to subscribe to path topic: " << this->pathTopic_ << std::endl;
   }
 
-  this->posePub_ = this->node_.Advertise<gz::msgs::Pose>("/diver/pose");
+  // this->posePub_ = this->node_.Advertise<gz::msgs::Pose>("/diver/pose");
 
   this->lastUpdate_ = std::chrono::steady_clock::duration::zero();
 }
@@ -324,73 +324,73 @@ void GazeboRosActorCommand::PreUpdate(
 
 }
 
-void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
-    const gz::sim::EntityComponentManager &_ecm)
-{
-    GZ_PROFILE("GazeboRosActorCommand::PostUpdate");
+// void GazeboRosActorCommand::PostUpdate(const gz::sim::UpdateInfo &_info,
+//     const gz::sim::EntityComponentManager &_ecm)
+// {
+//     GZ_PROFILE("GazeboRosActorCommand::PostUpdate");
 
-    // if (_info.dt < std::chrono::steady_clock::duration::zero())
-    // {
-    //     gzwarn << "Detected jump back in time ["
-    //         << std::chrono::duration_cast<std::chrono::seconds>(_info.dt).count()
-    //         << "s]. System may not work properly." << std::endl;
-    // }
+//     // if (_info.dt < std::chrono::steady_clock::duration::zero())
+//     // {
+//     //     gzwarn << "Detected jump back in time ["
+//     //         << std::chrono::duration_cast<std::chrono::seconds>(_info.dt).count()
+//     //         << "s]. System may not work properly." << std::endl;
+//     // }
 
-    // if (_info.paused)
-    // return;
+//     // if (_info.paused)
+//     // return;
 
-    // bool publish = true;
+//     // bool publish = true;
 
-    // auto diff = _info.simTime - this->dataPtr->lastUpdate;
+//     // auto diff = _info.simTime - this->dataPtr->lastUpdate;
 
-    // if ((diff > std::chrono::steady_clock::duration::zero()) &&
-    //   (diff < this->dataPtr->updatePeriod))
-    // {
-    //     publish = false;
-    // }
-    // if (!publish)
-    //     return;
+//     // if ((diff > std::chrono::steady_clock::duration::zero()) &&
+//     //   (diff < this->dataPtr->updatePeriod))
+//     // {
+//     //     publish = false;
+//     // }
+//     // if (!publish)
+//     //     return;
     
-    // auto actorpose = _ecm.Component<gz::sim::components::WorldPose>(this->actorEntity_);
+//     // auto actorpose = _ecm.Component<gz::sim::components::WorldPose>(this->actorEntity_);
 
-    auto worldPoseComp = _ecm.Component<gz::sim::components::WorldPose>(this->actorEntity_);
-    // auto trajPoseComp = _ecm.Component<gz::sim::components::TrajectoryPose>(this->actorEntity_);
-    // gzmsg << "actor pose: " << currentPose->Data().Pos().X() << std::endl;
+//     auto worldPoseComp = _ecm.Component<gz::sim::components::WorldPose>(this->actorEntity_);
+//     // auto trajPoseComp = _ecm.Component<gz::sim::components::TrajectoryPose>(this->actorEntity_);
+//     // gzmsg << "actor pose: " << currentPose->Data().Pos().X() << std::endl;
 
-    if (!worldPoseComp) { 
-      std::cout << "missing" << std::endl;   
-    } else {
-      auto actorPose = worldPoseComp->Data();
-      auto currentPose = actorPose;
-      std::cout << currentPose.Pos().X() << std::endl;      
-    }
+//     if (!worldPoseComp) { 
+//       std::cout << "missing" << std::endl;   
+//     } else {
+//       auto actorPose = worldPoseComp->Data();
+//       auto currentPose = actorPose;
+//       std::cout << currentPose.Pos().X() << std::endl;      
+//     }
 
 
-    // gz::msgs::Pose pose_msg;
+//     // gz::msgs::Pose pose_msg;
 
-    // pose_msg.mutable_position()->set_x(actorpose->Data().Pos().X());
+//     // pose_msg.mutable_position()->set_x(actorpose->Data().Pos().X());
 
-    // this->posePub_.Publish(pose_msg);
+//     // this->posePub_.Publish(pose_msg);
 
-    // msgs::Pose *msg = nullptr;
-    // this->dataPtr->poseMsg.Clear();
-    // msg = &this->dataPtr->poseMsg;
+//     // msgs::Pose *msg = nullptr;
+//     // this->dataPtr->poseMsg.Clear();
+//     // msg = &this->dataPtr->poseMsg;
     
-    // auto timeStamp = gz::sim::convert<gz::msgs::Time>(_info.simTime);
-    // auto header = msg->mutable_header();
-    // header->mutable_stamp()->CopyFrom(timeStamp);
-    // const math::Pose3d &transform = actorpose->Data();  
-    // auto frame = header->add_data();
-    // msg->set_name(_ecm.Component<components::Name>(this->dataPtr->actorEntity)->Data());
-    // msgs::Set(msg, transform);
+//     // auto timeStamp = gz::sim::convert<gz::msgs::Time>(_info.simTime);
+//     // auto header = msg->mutable_header();
+//     // header->mutable_stamp()->CopyFrom(timeStamp);
+//     // const math::Pose3d &transform = actorpose->Data();  
+//     // auto frame = header->add_data();
+//     // msg->set_name(_ecm.Component<components::Name>(this->dataPtr->actorEntity)->Data());
+//     // msgs::Set(msg, transform);
 
 
-    // this->dataPtr->posePub.Publish(this->dataPtr->poseMsg);
+//     // this->dataPtr->posePub.Publish(this->dataPtr->poseMsg);
 
-    // this->dataPtr->PublishPoses(this->dataPtr->poses, convert<msgs::Time>(_info.simTime), this->dataPtr->posePub);
+//     // this->dataPtr->PublishPoses(this->dataPtr->poses, convert<msgs::Time>(_info.simTime), this->dataPtr->posePub);
 
-    // this->dataPtr->lastUpdate = _info.simTime;
-}  
+//     // this->dataPtr->lastUpdate = _info.simTime;
+// }  
 
 void GazeboRosActorCommand::ChooseNewTarget() {
   this->idx_++;
