@@ -404,8 +404,8 @@ GZ_ADD_PLUGIN(
   gazebo_ros_actor_plugin::GazeboRosActorCommand,
   gz::sim::System,
   GazeboRosActorCommand::ISystemConfigure,
-  GazeboRosActorCommand::ISystemPreUpdate,
-  GazeboRosActorCommand::ISystemPostUpdate)
+  GazeboRosActorCommand::ISystemPreUpdate)
+  // GazeboRosActorCommand::ISystemPostUpdate)
 
 GZ_ADD_PLUGIN_ALIAS(
   gazebo_ros_actor_plugin::GazeboRosActorCommand,
